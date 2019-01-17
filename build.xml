@@ -1,0 +1,25 @@
+<project name="Microemulator">
+    <echo message="Building Microemulator" />
+
+    <mkdir dir="build/classes"/>
+    <javac srcdir="src" destdir="build/classes" includeantruntime="false" debug="true" nowarn="true" debuglevel="lines,vars,source">
+        <classpath>
+            <fileset dir="lib">
+                <include name="com.springsource.org.objectweb.asm-3.2.0.jar"/>
+            </fileset>
+        </classpath>
+    </javac>
+
+    <echo message="Building JAR" />
+    <jar destfile="build/microemulator.jar" basedir="build/classes">
+        <fileset dir="src" includes="org/microemu/device/default/**"/>
+        <fileset dir="src" includes="org/microemu/device/resizable/**"/>
+        <fileset dir="src" includes="org/microemu/icon.png" />
+        <zipgroupfileset dir="lib" includes="*.jar"/>
+        <manifest>
+            <attribute name="Main-Class" value="org.microemu.app.Main"/>
+            <attribute name="Implementation-Title" value="Microemulator"/>
+        </manifest>
+    </jar>
+
+</project>
